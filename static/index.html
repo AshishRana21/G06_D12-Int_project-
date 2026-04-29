@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic RAG Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-badge">Agentic + RAG</div>
+        <h1>Research Studio</h1>
+        <p>Upload a PDF and extract visual intelligence</p>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Query</div>
+        <form id="generate-form">
+          <div class="input-group">
+            <label for="topic">Research Topic</label>
+            <textarea id="topic" name="topic" class="input-field" rows="3" placeholder="Example: tell me about cloud computing" required></textarea>
+          </div>
+
+          <div class="input-group">
+            <label for="pdf">Upload PDF</label>
+            <div class="file-drop" id="file-drop">
+              <input type="file" id="pdf" name="pdf" accept="application/pdf,.pdf">
+              <div class="file-drop-icon" id="file-icon">PDF</div>
+              <div class="file-drop-text"><span>Choose file</span> or drag and drop</div>
+              <div class="file-name" id="file-name"></div>
+            </div>
+          </div>
+
+          <button class="generate-btn" id="submit-button" type="submit">Generate Summary</button>
+        </form>
+
+        <div class="status-bar" id="status-bar" aria-live="polite">
+          <div class="status-dot"></div>
+          <span id="status-text"></span>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-label">Model</div>
+        <div class="model-chip">AI <span>Groq + CrewAI</span> · RAG enabled</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="topbar-title">Output <span>/ Visual Summary</span></div>
+        <div class="topbar-pills">
+          <button class="pill active" type="button" data-view="teaching">Teaching</button>
+          <button class="pill" type="button" data-view="research">Research</button>
+          <button class="pill" type="button" data-view="raw">Raw</button>
+        </div>
+      </div>
+
+      <div class="content">
+        <section class="empty-state" id="empty-state">
+          <div class="empty-icon">RAG</div>
+          <h2>Ready to Research</h2>
+          <p>Enter a topic, upload your PDF, and generate a visual summary powered by your agentic RAG backend.</p>
+        </section>
+
+        <section class="progress-section" id="progress-section">
+          <div class="progress-header">
+            <span id="progress-label">Processing...</span>
+            <span id="progress-pct">0%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+          <div class="progress-steps">
+            <div class="step-chip" id="step-1">Ingesting PDF</div>
+            <div class="step-chip" id="step-2">Retrieving</div>
+            <div class="step-chip" id="step-3">Researching</div>
+            <div class="step-chip" id="step-4">Generating</div>
+          </div>
+        </section>
+
+        <section class="result-area" id="result-area">
+          <div class="visual-card">
+            <div class="visual-card-header">
+              <span class="visual-card-title">Visual Context</span>
+              <div class="pdf-badge" id="pdf-meta">No PDF selected</div>
+            </div>
+            <div class="visual-placeholder">
+              <img id="generated-image" alt="Generated educational illustration">
+            </div>
+          </div>
+
+          <div class="tabs">
+            <button class="tab active" type="button" data-tab="teaching">Teaching Summary</button>
+            <button class="tab" type="button" data-tab="research">Research Notes</button>
+            <button class="tab" type="button" data-tab="raw">Full Output</button>
+          </div>
+
+          <div class="tab-content active" id="tab-teaching">
+            <article class="summary-card">
+              <div class="card-header">
+                <div class="card-icon green">1</div>
+                <div class="card-title">Teaching Summary</div>
+              </div>
+              <div class="card-body markdown" id="teaching-summary"></div>
+            </article>
+          </div>
+
+          <div class="tab-content" id="tab-research">
+            <article class="summary-card">
+              <div class="card-header">
+                <div class="card-icon blue">2</div>
+                <div class="card-title">Research Notes</div>
+              </div>
+              <div class="card-body markdown" id="research-report"></div>
+            </article>
+          </div>
+
+          <div class="tab-content" id="tab-raw">
+            <article class="summary-card">
+              <div class="card-header">
+                <div class="card-icon amber">3</div>
+                <div class="card-title">Combined Output</div>
+              </div>
+              <div class="card-body markdown" id="raw-output"></div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
