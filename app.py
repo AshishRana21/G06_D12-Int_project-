@@ -182,7 +182,7 @@ def _disposition_value(disposition: str, key: str) -> str:
 
 
 def main() -> None:
-    host = "127.0.0.1"
+    host = "0.0.0.0"
     port = 8000
     server = ThreadingHTTPServer((host, port), AppHandler)
     print(f"Open http://{host}:{port}")
